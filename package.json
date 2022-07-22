@@ -10,14 +10,18 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:createreactcomponent.pick"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "createreactcomponent.pick",
-        "title": "Pick"
+        "command": "createreactcomponent.js",
+        "title": "Create Js Component"
+      },
+      {
+        "command": "createreactcomponent.ts",
+        "title": "Create Ts Component"
       }
     ]
   },

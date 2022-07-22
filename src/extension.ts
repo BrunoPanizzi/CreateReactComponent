@@ -1,35 +1,42 @@
 import { ExtensionContext, commands, window } from 'vscode'
 
 import showPrompt from './inputPrompt'
-import read from './isReactProject'
+import isReactProject from './isReactProject'
 import writeFiles from './writeFiles'
 
-export function activate(context: ExtensionContext) {
-  let disposable = commands.registerCommand(
-    'createreactcomponent.pick',
-    async () => {
-      const isReact = await read()
+async function main(fileType: 'js' | 'ts') {
+  const isReact = await isReactProject()
 
-      if (!isReact) {
-        window.showErrorMessage('The open folder is not a react project')
-        return
-      }
+  if (!isReact) {
+    return
+  }
 
-      const componentName = await showPrompt()
+  const componentName = await showPrompt()
 
-      if (!componentName) {
-        return console.log('aborting')
-      }
+  if (!componentName) {
+    return console.log('aborting')
+  }
 
-      window.showInformationMessage(
-        `creating component with name: ${componentName}`
-      )
+  if (componentName.includes(' ')) {
+    return window.showErrorMessage('Component name cannot have spaces')
+  }
 
-      writeFiles(componentName)
-    }
+  window.showInformationMessage(
+    `Creating component with name: ${componentName}`
   )
 
-  context.subscriptions.push(disposable)
+  writeFiles(componentName, fileType)
+}
+
+export function activate(context: ExtensionContext) {
+  let createTs = commands.registerCommand('createreactcomponent.ts', () =>
+    main('ts')
+  )
+  let createJs = commands.registerCommand('createreactcomponent.js', () =>
+    main('js')
+  )
+
+  context.subscriptions.push(createTs, createJs)
 }
 
 export function deactivate() {}
