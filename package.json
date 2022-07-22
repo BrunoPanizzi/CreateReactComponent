@@ -1,13 +1,23 @@
 {
   "name": "createreactcomponent",
-  "displayName": "CreateReactComponent",
-  "description": "",
+  "displayName": "Create React Component",
+  "description": "A small extension to create a react component with styled-components",
   "version": "0.0.1",
+  "bugs": {
+    "url": "https://github.com/BrunoPanizzi/CreateReactComponent"
+  },
+  "author": {
+    "name": "Bruno Panizzi"
+  },
+  "repository": {
+    "url": "https://github.com/BrunoPanizzi/CreateReactComponent"
+  },
+  "publisher": "BrunoPanizzi",
   "engines": {
     "vscode": "^1.69.0"
   },
   "categories": [
-    "Other"
+    "Snippets"
   ],
   "activationEvents": [
     "onStartupFinished"
